@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row py-2">
+        <div class="row py-2 text-white">
             <h1>EDIT PROJECT</h1>
         </div>
         @include('partials.validation-errors')
@@ -13,9 +13,9 @@
             @method('PUT')
 
             <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title"
-                    aria-describedby="titleHelper" placeholder="project"
+                <label for="title" class="form-label text-white">Title</label>
+                <input type="text" class="form-control text-white bg-dark @error('title') is-invalid @enderror"
+                    name="title" id="title" aria-describedby="titleHelper" placeholder="project"
                     value="{{ $project->title }} {{ old('title') }}" />
                 <small id="titleHelper" class="form-text text-muted">Type a title for this project</small>
                 @error('title')
@@ -31,18 +31,55 @@
                 @endif
 
                 <div class="mb-3">
-                    <label for="cover_image" class="form-label">Image</label>
-                    <input type="file" class="form-control @error('cover_image') is-invalid @enderror" name="cover_image"
-                        id="cover_image" aria-describedby="cover_imageHelper" placeholder="project" value="" />
+                    <label for="cover_image" class="form-label text-white">Image</label>
+                    <input type="file" class="form-control text-white bg-dark @error('cover_image') is-invalid @enderror"
+                        name="cover_image" id="cover_image" aria-describedby="cover_imageHelper" placeholder="project"
+                        value="" />
                     <small id="cover_imageHelper" class="form-text text-muted">Type a image for this project</small>
                     @error('cover_image')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
             </div>
+
+
+            <label for="cover_image" class="form-label text-white">Select one or more technologies</label>
+            <div class="mb-3 d-flex gap-3 flex-wrap text-white">
+                @foreach ($technologies as $technology)
+                    @if ($errors->any())
+                        <div class="form-check text-white">
+                            <input name="technologies[]" class="form-check-input" type="checkbox"
+                                value="{{ $technology->id }}" id="technology-{{ $technology->id }}"
+                                {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }} />
+                            <label class="form-check-label" for="technology-{{ $technology->id }}">
+                                {{ $technology->name }}
+                            </label>
+                        </div>
+                    @else
+                        <div class="form-check text-white">
+                            @dd($project)
+                            <input name="technologies[]" class="form-check-input" type="checkbox"
+                                value="{{ $technology->id }}" id="technology-{{ $technology->id }}"
+                                {{-- {{ array_values($tecnology) ? 'checked' : '' }}  --}} />
+                            <label class="form-check-label" for="technology-{{ $technology->id }}">
+                                {{ $technology->name }}
+                            </label>
+                        </div>
+                    @endif
+                @endforeach
+                @error('technologies')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            {{-- select technologies --}}
+
+
+
+
+
             <div class="mb-3">
                 <label for="type_id" class="form-label">Type</label>
-                <select class="form-select form-select-lg" name="type_id" id="type_id">
+                <select class="form-select form-select-lg text-white bg-dark" name="type_id" id="type_id">
                     <option selected disabled>Select a type</option>
                     @foreach ($types as $type)
                         <option value="{{ $type->id }}"
@@ -53,8 +90,8 @@
             </div>
             <div class="mb-3">
                 <label for="create_data" class="form-label">Date</label>
-                <input type="text" class="form-control @error('create_data') is-invalid @enderror" name="create_data"
-                    id="create_data" aria-describedby="create_dataHelper" placeholder="project date"
+                <input type="text" class="form-control text-white bg-dark @error('create_data') is-invalid @enderror"
+                    name="create_data" id="create_data" aria-describedby="create_dataHelper" placeholder="project date"
                     value="{{ old('create_date') }}{{ $project->create_data }}" />
                 <small id="create_dataHelper" class="form-text text-muted">Type a date for this project</small>
                 @error('create_data')
@@ -63,8 +100,8 @@
             </div>
             <div class="mb-3">
                 <label for="repo" class="form-label">Repo</label>
-                <input type="text" class="form-control @error('repo') is-invalid @enderror" name="repo" id="repo"
-                    aria-describedby="repoHelper" placeholder="project date"
+                <input type="text" class="form-control text-white bg-dark @error('repo') is-invalid @enderror"
+                    name="repo" id="repo" aria-describedby="repoHelper" placeholder="project date"
                     value="{{ $project->repo }}{{ old('repo') }}" />
                 <small id="repoHelper" class="form-text text-muted">Type link the repo for this project</small>
                 @error('repo')
@@ -73,8 +110,8 @@
             </div>
             <div class="mb-3">
                 <label for="code" class="form-label">Code</label>
-                <input type="text" class="form-control @error('code') is-invalid @enderror" name="code" id="code"
-                    aria-describedby="codeHelper" placeholder="project date"
+                <input type="text" class="form-control text-white bg-dark @error('code') is-invalid @enderror"
+                    name="code" id="code" aria-describedby="codeHelper" placeholder="project date"
                     value="{{ $project->code }}{{ old('code') }}" />
                 <small id="codeHelper" class="form-text text-muted">Type link the code for this project</small>
                 @error('code')
@@ -83,8 +120,8 @@
             </div>
             <div class="mb-3">
                 <label for="video" class="form-label">Video</label>
-                <input type="text" class="form-control @error('video') is-invalid @enderror" name="video"
-                    id="video" aria-describedby="videoHelper" placeholder="project date"
+                <input type="text" class="form-control text-white bg-dark @error('video') is-invalid @enderror"
+                    name="video" id="video" aria-describedby="videoHelper" placeholder="project date"
                     value="{{ $project->video }}{{ old('video') }}" />
                 <small id="videoHelper" class="form-text text-muted">Type link the video for this project</small>
                 @error('video')
@@ -94,7 +131,8 @@
             <div class="mb-3">
                 <label for="video" class="form-label">Description</label>
                 <div class="form-floating">
-                    <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror"
+                    <textarea name="description" id="description"
+                        class="form-control text-white bg-dark @error('description') is-invalid @enderror"
                         placeholder="Leave a comment here"style="height: 100px">{{ $project->description }}{{ old('description') }}</textarea>
                     <label for="floatingTextarea">
                         @error('description')
