@@ -41,7 +41,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request, Faker $faker)
     {
-        dd($request->all());
+        //dd($request->all());
         //validiamo
         $validated = $request->validated();
 

@@ -34,12 +34,13 @@
 
 
 
-            <label for="cover_image" class="form-label text-danger">Select one or more technologies</label>
+            <label for="cover_image" class="form-label text-white">Select one or more technologies</label>
             <div class="mb-3 d-flex gap-3 flex-wrap ">
                 @foreach ($technologies as $technology)
                     <div class="form-check text-white">
                         <input name="technologies[]" class="form-check-input" type="checkbox" value="{{ $technology->id }}"
-                            id="technology-{{ $technology->id }}" {{-- {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}  --}} />
+                            id="technology-{{ $technology->id }}"
+                            {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }} />
                         <label class="form-check-label" for="technology-{{ $technology->id }}"> {{ $technology->name }}
                         </label>
                     </div>
@@ -52,7 +53,7 @@
 
             {{--
             <div class="mb-3">
-                <label for="technologies" class="form-label text-danger">Select one or more technologies</label>
+                <label for="technologies" class="form-label text-white">Select one or more technologies</label>
                 <select multiple class="form-select form-select-lg" name="technologies[]" id="technologies">
                     <option selected>Select one</option>
                     @foreach ($technologies as $technology)
