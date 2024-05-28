@@ -5,9 +5,15 @@
         <section class="py-4">
             <div class="d-flex justify-content-between text-danger">
                 <h1>TECHNOLOGIES</h1>
-                <div>
-                    <a class="btn btn-outline-danger" href="{{ route('admin.technologies.create') }}"><i class="fa fa-pencil"
-                            aria-hidden="true"></i> NewTechnology</a>
+                <div class="d-flex flex-column">
+
+                    <form action="{{ route('admin.technologies.store') }}" method="post" class="p-2">
+                        @csrf
+
+                        <input name="name" id="name" aria-describedby="nameHelper" placeholder="technology name"
+                            class="bg-dark text-danger @error('name') is-invalid @enderror" type="text" value="">
+                    </form>
+                    <label> New Technology Press Enter</label>
                 </div>
             </div>
         </section>
