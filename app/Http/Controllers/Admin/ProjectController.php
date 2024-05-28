@@ -90,7 +90,7 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        dd($request->all());
+        //dd($request->all());
         $validated = $request->validated();
         $slug = Str::slug($request->title, '-');
         $validated['slug'] = $slug;
@@ -104,6 +104,12 @@ class ProjectController extends Controller
             $image_path = Storage::put('uploads', $validated['cover_image']);
             //dd($validated, $image_path);
             $validated['cover_image'] = $image_path;
+        }
+
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($validated['technologies']);
+        } else {
+            $project->technologies()->synch($validated[]);
         }
 
         $project->update($validated);
