@@ -31,9 +31,11 @@
                                 <form action="{{ route('admin.technologies.update', $technology) }}" method="post">
                                     @csrf
                                     @method('PUT')
-                                    <input name="name" class="bg-dark text-danger" type="text"
-                                        value="{{ $technology->name }}">
 
+                                    <input name="name" id="name" aria-describedby="nameHelper"
+                                        placeholder="technology name"
+                                        class="bg-dark text-danger @error('name') is-invalid @enderror" type="text"
+                                        value="{{ $technology->name }}">
                                 </form>
                             </td>
                             <td class="text-danger">{{ $technology->slug }}</td>
@@ -71,7 +73,7 @@
                                                 </button>
 
 
-                                                <form action="{{ route('admin.types.destroy', $technology) }}"
+                                                <form action="{{ route('admin.technologies.destroy', $technology) }}"
                                                     method="post">
                                                     @csrf
                                                     @method('DELETE')

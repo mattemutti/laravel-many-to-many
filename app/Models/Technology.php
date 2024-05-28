@@ -10,6 +10,9 @@ class Technology extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'slug'];
+
+
     /**
      * The thecnologies that belong to the Technology
      *
