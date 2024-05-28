@@ -35,6 +35,15 @@
                     <div class="d-flex py-5">
                         <div class="text-white">Slug: {{ $project->slug }}</div>
                     </div>
+                    <strong class="text-white">Technologies</strong>
+                    <div>
+                        @forelse ($project->technologies as $technology)
+                            <span class="badge bg-light text-dark">{{ $technology->name }}</span>
+                        @empty
+                            <span class="badge bg-light text-dark"> n/a </span>
+                        @endforelse
+                    </div>
+
                     <div class="d-flex justify-content-evenly py-5">
                         <div class="text-white">Repo: {{ $project->repo }}</div>
                         <div class="text-white">Code: {{ $project->code }}</div>
@@ -46,7 +55,7 @@
 
                 <div class="d-flex justify-content-center py-5">
                     <div class="text-white">Video:</div>
-                    <div class="text-white">{{ $project->description }}</div>
+                    <div class="text-white">{{ $project->video }}</div>
                 </div>
             </div>
         </div>
