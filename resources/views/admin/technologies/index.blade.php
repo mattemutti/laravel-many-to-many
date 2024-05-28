@@ -27,14 +27,17 @@
                     @forelse ($technologies as $technology)
                         <tr>
                             <td class="text-danger" scope="row">{{ $technology->id }}</td>
-                            <td class="text-danger">{{ $technology->name }}</td>
+                            <td class="text-danger">
+                                <form action="{{ route('admin.technologies.update', $technology) }}" method="post">
+                                    @csrf
+                                    @method('PUT')
+                                    <input name="name" class="bg-dark text-danger" type="text"
+                                        value="{{ $technology->name }}">
+
+                                </form>
+                            </td>
                             <td class="text-danger">{{ $technology->slug }}</td>
                             <td>
-                                <a class="btn
-                            btn-outline-success"
-                                    href="{{ route('admin.technologies.show', $technology) }}">View</a>
-                                <a class="btn btn-outline-warning"
-                                    href="{{ route('admin.technologies.edit', $technology) }}">Edit</a>
 
                                 <!-- Modal trigger button -->
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
@@ -58,7 +61,8 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body text-danger">
-                                                Attention! You are about to delete this record. The operation is DESTRUCTIVE
+                                                Attention! You are about to delete this record. The operation is
+                                                DESTRUCTIVE
                                                 ❌❌❌
                                             </div>
                                             <div class="modal-footer">
@@ -80,6 +84,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </td>
                         </tr>
                     @empty
